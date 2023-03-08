@@ -3,7 +3,7 @@
 #define DB double
 #define IT set<node>::iterator
 using namespace std;
-
+int a;
 int main(){
     cout<<"Hello World";
     return 0;
