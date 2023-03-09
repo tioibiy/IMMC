@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-dt=1
+dt=1#
 
 M=3
 N=1
@@ -10,9 +10,9 @@ T=10
 maxx=100
 maxy=100
 
-pos=[[0,0],[2,1]]
+pos=[[0,0],[2,1]]#
 
-typ=[0,1]
+typ=[0,1] #
 
 def e(xx,yy,typ,A,x,y):
     if(xx==x or yy==y):
