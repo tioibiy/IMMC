@@ -34,6 +34,8 @@ $$
 
 > $E$的输出是一个$M$维(数学上的)向量
 
+定义收益$P(r,T,list=[a_0((x,y),i)])$
+
 ## 微分方程
 
 $$
@@ -59,4 +61,12 @@ $$
 \frac{d(a[x][y][i][t])}{dt}=\sum_{k=1}^nf(list=\{getEffect({type}_k,i,a[x][y][i][t])\})E(\{{pos}_k,{type}_k,A(k,t)\},(x,y))\\
 a[x][y][i][t]=a_0((x,y),i)
 \end{aligned}
+$$
+
+## 积分
+
+定义收益
+
+$$
+P(r,T,list=[a_0((x,y),i)])=\int_0^T(\sum_{k=1}^n(rh_1(t)+(1-r)h_2(t))A(k,t)S(t))dt
 $$
