@@ -7,14 +7,15 @@ M=1
 N=2
 Q=1
 T=1
-maxx=4
-maxy=4
+maxx=54
+maxy=35
 
 pos=[[1,1],[2,2]]#
 
 typ=[1,1] #
 
 def e(xx,yy,typ,A,x,y):
+    
     if(xx==x and yy==y):
         return -A
     return -A/((x-xx)**2+(y-yy)**2)
@@ -48,7 +49,7 @@ def dif(a0):
             for x in range(0,maxx):
                 for y in range(0,maxy):
                     for i in range(0,M):
-                        da[x,y,i]+=*A[k,t]*e(pos[k][0],pos[k][1],typ[k],A[k,t],x,y)
+                        da[x,y,i]+=A[k,t]*e(pos[k][0],pos[k][1],typ[k],A[k,t],x,y)
         a[:,:,:,t]=a[:,:,:,t-1]+da*dt
         # print(a[:maxx,:maxy,0,t])
         # print(da[:maxx,:maxy,0])
