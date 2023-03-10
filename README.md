@@ -68,5 +68,5 @@ $$
 定义收益
 
 $$
-P(r,T,list=[a_0((x,y),i)])=\int_0^T(\sum_{k=1}^n(rh_1(t)+(1-r)h_2(t))A(k,t)S(t))dt
+P(r,T,list=[a_0((x,y),i)])=\int_0^T(\sum_{k=1}^n(rh_1(t)+(1-r)h_2(t))A(k,t)S({type}_k,t))dt
 $$
