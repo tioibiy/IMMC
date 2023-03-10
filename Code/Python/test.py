@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 dt=1#
 
-M=3
+M=1
 N=1
 Q=1
 T=10
@@ -15,12 +15,14 @@ pos=[[0,0],[2,1]]#
 typ=[0,1] #
 
 def e(xx,yy,typ,A,x,y):
-    if(xx==x or yy==y):
-        return A*typ
-    return A*typ/((x-xx)**2+(y-yy)**2)
+    return 1
+    # if(xx==x or yy==y):
+    #     return A*typ
+    # return A*typ/((x-xx)**2+(y-yy)**2)
 
 def get(typ,i,aa):
-    return i*typ/aa
+    return aa
+    # return i*typ/aa
 
 a=np.ones([maxx,maxy,15,25])
 
