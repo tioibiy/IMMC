@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-dt=0.0001#
+dt=0.001#
 
 M=1
 N=2
@@ -14,8 +14,14 @@ pos=[[1,1],[2,2]]#
 
 typ=[1,1] #
 
+# typName=["","越野滑雪设施","农作物农场","牧场","再生农场","太阳能发电阵列","农业光伏农场","农业旅游中心"]
+
+# aName=["坡度","植被覆盖率","气候(天气)","交通","污染",""]
+
+def norm(sig,u,x):
+    return math.exp((-(x-u)**2)/(2*(sig**2)))/(math.sqrt(2*math.pi)*sig)
+
 def e(xx,yy,typ,A,x,y):
-    
     if(xx==x and yy==y):
         return -A
     return -A/((x-xx)**2+(y-yy)**2)
@@ -49,7 +55,7 @@ def dif(a0):
             for x in range(0,maxx):
                 for y in range(0,maxy):
                     for i in range(0,M):
-                        da[x,y,i]+=A[k,t]*e(pos[k][0],pos[k][1],typ[k],A[k,t],x,y)
+                        da[x,y,i]+=0.1*A[k,t]*e(pos[k][0],pos[k][1],typ[k],A[k,t],x,y)
         a[:,:,:,t]=a[:,:,:,t-1]+da*dt
         # print(a[:maxx,:maxy,0,t])
         # print(da[:maxx,:maxy,0])
@@ -58,6 +64,8 @@ def dif(a0):
     return A
 
 def S(typ,t):
+    if t==0:
+        return 
     return 1
 
 def h(flag,t):
@@ -72,9 +80,11 @@ def rate(r,t):
 def P(r,a0):
     A=dif(a0)
     p=0
-    for t in range(1,int(T/dt)):
+    for t in range(0,int(T/dt)):
         dp=0
         for k in range(N):
+            if t==0:
+                dp+=S(typ[k],t)*rate(r,t)
             dp+=A[k,t]*S(typ[k],t)*rate(r,t)
         p+=dp*dt
 
@@ -85,3 +95,4 @@ a0[1,1,0]=10
 a0[2,2,0]=5
 
 print(dif(a0)[0:2])
+

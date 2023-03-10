@@ -70,3 +70,103 @@ $$
 $$
 P(r,T,list=[a_0((x,y),i)])=\int_0^T(\sum_{k=1}^n(rh_1(t)+(1-r)h_2(t))A(k,t)S({type}_k,t))dt
 $$
+
+## 新·定义
+
+$$
+a=
+\begin{bmatrix}
+    \begin{bmatrix}
+        a_{(0,0),0}(\cdot)\\
+        \vdots\\
+        a_{(0,0),M-1}(\cdot)\\
+    \end{bmatrix}&
+    \cdots&
+    \begin{bmatrix}
+        a_{(0,maxy-1),0}(\cdot)\\
+        \vdots\\
+        a_{(0,maxy-1),M-1}(\cdot)\\
+    \end{bmatrix}&\\
+    \vdots&\ddots&\vdots\\
+    \begin{bmatrix}
+        a_{(maxx-1,0),0}(\cdot)\\
+        \vdots\\
+        a_{(maxx-1,0),M-1}(\cdot)\\
+    \end{bmatrix}&
+    \cdots&
+    \begin{bmatrix}
+        a_{(maxx-1,maxy-1),0}(\cdot)\\
+        \vdots\\
+        a_{(maxx-1,maxy-1),M-1}(\cdot)\\
+    \end{bmatrix}
+\end{bmatrix}\Leftarrow
+\begin{bmatrix}
+    maxx\\
+    maxy\\
+    M
+\end{bmatrix}
+$$
+
+$$
+U=
+\begin{bmatrix}
+    U_{0,0}(\cdot)&U_{0,1}(\cdot)&\cdots&U_{0,M-1}(\cdot)\\
+    U_{1,0}(\cdot)&U_{1,1}(\cdot)&\cdots&U_{1,M-1}(\cdot)\\
+    \vdots&\vdots&\ddots&\vdots\\
+    U_{Q-1,0}(\cdot)&U_{Q-1,1}(\cdot)&\cdots&U_{Q-1,M-1}(\cdot)\\
+\end{bmatrix}\Leftarrow
+\begin{bmatrix}
+    Q\\
+    M
+\end{bmatrix}
+$$
+
+$$
+V=
+\begin{bmatrix}
+    V_{0,0}(\cdot)&V_{0,1}(\cdot)&\cdots&V_{0,Q-1}(\cdot)\\
+    V_{1,0}(\cdot)&V_{1,1}(\cdot)&\cdots&V_{1,Q-1}(\cdot)\\
+    \vdots&\vdots&\ddots&\vdots\\
+    V_{M-1,0}(\cdot)&V_{M-1,1}(\cdot)&\cdots&V_{M-1,Q-1}(\cdot)\\
+\end{bmatrix}\Leftarrow
+\begin{bmatrix}
+    M\\
+    Q
+\end{bmatrix}
+$$
+
+$$
+W=
+\begin{bmatrix}
+    w_0\\
+    w_1\\
+    \vdots\\
+    w_{M-1}
+\end{bmatrix}\Leftarrow
+\begin{bmatrix}
+    M\\
+\end{bmatrix}
+$$
+
+$$
+A(t)=
+\begin{bmatrix}
+    A_0(\cdot)\\
+    A_1(\cdot)\\
+    \vdots\\
+    A_{N-1}(\cdot)
+\end{bmatrix}\Leftarrow
+\begin{bmatrix}
+    N\\
+\end{bmatrix}
+$$
+
+$$
+A_k(t)=
+\frac{(V_{:,{type}_k}\bigotimes a_{{pos}_k,:}(t))\times W^T}{M}
+$$
+
+$$
+\frac{d{a}_{pos,i}(t)}{dt}=
+\sum_{k=1}^NA_k(t)U_{{type}_k,i}(pos_k,pos)
+$$
