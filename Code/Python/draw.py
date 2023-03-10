@@ -60,7 +60,7 @@ start=np.array(start)
 out=np.array(out)
 
 plt.scatter(start[:,0],start[:,1],c=out,s=17)
-
+plt.colorbar()
 # ax.scatter3D(x, y, z,c=num)
 
 plt.show()
