@@ -74,6 +74,18 @@ $$
 ## 新·定义
 
 $$
+\begin{bmatrix}
+    f_i
+\end{bmatrix}_{i=1}^n=
+\begin{bmatrix}
+    f_1\\
+    f_2\\
+    \vdots\\
+    f_n
+\end{bmatrix}
+$$
+
+$$
 a=
 \begin{bmatrix}
     \begin{bmatrix}
@@ -99,10 +111,16 @@ a=
         \vdots\\
         a_{(maxx-1,maxy-1),M-1}(\cdot)\\
     \end{bmatrix}
-\end{bmatrix}\Leftarrow
+\end{bmatrix}
 \begin{bmatrix}
-    maxx\\
-    maxy\\
+    \begin{bmatrix}
+        a_{(x,y),i}(\cdot)\\
+    \end{bmatrix}_{i\in [0,M)}
+\end{bmatrix}_{x\in [0,x_{max}),y\in [0,y_{max})}
+\Leftarrow
+\begin{bmatrix}
+    x_{max}\\
+    y_{max}\\
     M
 \end{bmatrix}
 $$
@@ -114,7 +132,11 @@ U=
     U_{1,0}(\cdot)&U_{1,1}(\cdot)&\cdots&U_{1,M-1}(\cdot)\\
     \vdots&\vdots&\ddots&\vdots\\
     U_{Q-1,0}(\cdot)&U_{Q-1,1}(\cdot)&\cdots&U_{Q-1,M-1}(\cdot)\\
-\end{bmatrix}\Leftarrow
+\end{bmatrix}=
+\begin{bmatrix}
+    U_{j,i}(\cdot)
+\end{bmatrix}_{j\in [0,Q),i\in [0,M)}
+\Leftarrow
 \begin{bmatrix}
     Q\\
     M
@@ -128,7 +150,11 @@ V=
     V_{1,0}(\cdot)&V_{1,1}(\cdot)&\cdots&V_{1,Q-1}(\cdot)\\
     \vdots&\vdots&\ddots&\vdots\\
     V_{M-1,0}(\cdot)&V_{M-1,1}(\cdot)&\cdots&V_{M-1,Q-1}(\cdot)\\
-\end{bmatrix}\Leftarrow
+\end{bmatrix}=
+\begin{bmatrix}
+    V_{i,j}(\cdot)
+\end{bmatrix}_{i\in [0,M),j\in [0,Q)}
+\Leftarrow
 \begin{bmatrix}
     M\\
     Q
@@ -162,11 +188,20 @@ A(t)=
 $$
 
 $$
-A_k(t)=
-\frac{(V_{:,{type}_k}\bigotimes a_{{pos}_k,:}(t))\times W^T}{M}
+A(t)=
+\begin{bmatrix}
+    \frac{
+        \begin{bmatrix}
+        V_{i,{type}_k}(a_{{pos}_k,i}(t))
+        \end{bmatrix}_{i\in [0,M)}
+        \times W^T}{M}
+\end{bmatrix}_{k\in [0,N)}
 $$
 
 $$
-\frac{d{a}_{pos,i}(t)}{dt}=
-\sum_{k=1}^NA_k(t)U_{{type}_k,i}(pos_k,pos)
+\frac{d{a}_{pos,i}(t)}{dt}
+={A(t)}^T\times 
+\begin{bmatrix}
+    U_{{type}_k,i}(pos_k,pos)
+\end{bmatrix}_{k\in [0,N)}
 $$
