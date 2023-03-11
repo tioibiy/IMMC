@@ -162,6 +162,28 @@ V=
 $$
 
 $$
+V_{i,j}(a)\sim  N(\mu,\sigma^2)
+$$
+
+对第$i$个指标，若其范围是$[{a_i}_{min},{a_i}_{max}]$
+
+设函数$q(l,r,\mu,\sigma)=\frac{1}{2}erf(\frac{x-\mu}{\sqrt{2}\sigma})\lvert_l^r$
+
+则
+
+$$
+\frac{q({l_i}_{suit},{r_i}_{suit},\mu_i,\sigma)}{q({a_i}_{min},{a_i}_{max},\mu_i,\sigma)}=ts
+$$
+
+可将$\sigma$解出
+
+加入面积修正后
+
+$$
+V_{i,j}(a)=\frac{1}{\sqrt{2\pi}q({a_i}_{min},{a_i}_{max},\mu_i,\sigma)\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})
+$$
+
+$$
 W=
 \begin{bmatrix}
     w_0\\
@@ -221,9 +243,10 @@ S=
 $$
 
 $$
-P(r,T,a_0)=\int_0^T(rh_1(t)+(1-r)h_2(t)){A(t)}^T\times
+P(r,T,a_0,W)=\int_0^T(rh_1(t)+(1-r)h_2(t)){A(t)}^T\times
 \begin{bmatrix}
     S_{{type}_k}(t)
 \end{bmatrix}_{k\in [0,N)}
 dt
 $$
+
