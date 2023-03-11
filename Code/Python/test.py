@@ -5,62 +5,68 @@ dt=0.001#
 
 M=1
 N=2
-Q=1
+Q=7
 T=1
 maxx=54
 maxy=35
 
-pos=[[1,1],[2,2]]#
+class Pos:
+    x,y
+    def __init__(self,xx,yy):
+        self.x=xx
+        self.y=yy
+pos=[Pos(1,1),Pos(2,2)]#
 
 typ=[1,1] #
 
-# typName=["","越野滑雪设施","农作物农场","牧场","再生农场","太阳能发电阵列","农业光伏农场","农业旅游中心"]
+typName=["滑雪","农作物农场","牧场","再生农场","太阳能电池阵列","农业光伏农场","农业旅游中心"]
 
-# aName=["坡度","植被覆盖率","气候(天气)","交通","污染",""]
+aName=["坡度","植被覆盖率","湿度","降水","光照","温度","交通","污染","污染对产业的影响","人口","就业"]
 
 def norm(sig,u,x):
     return math.exp((-(x-u)**2)/(2*(sig**2)))/(math.sqrt(2*math.pi)*sig)
 
-def e(xx,yy,typ,A,x,y):
+def U(j,i,posk,pos):
+    '''
+    位于posk的第j种建筑对位于pos的第i个指标的影响程度
+    '''
     if(xx==x and yy==y):
         return -A
     return -A/((x-xx)**2+(y-yy)**2)
 
-def get(typ,i,aa):
-    return aa
-    # return i*typ/aa
+def V(i,j,a):
+    '''
+    第i个指标为a时对所在地块的第j种建筑的影响程度
+    '''
+    return a
 
-def dif(a0):
+def dif(a0,w):
 
     a=np.zeros([maxx,maxy,M,int(T/dt)])
 
-    a[:maxx,:maxy,:M,0]=a0
+    a[:,:,:,0]=a0
 
     A=np.zeros([N,int(T/dt)])
 
-    '''
-    (T/dt)*numx*numy*N*M=20*1000*1000*5*10=10^9
-    '''
     for t in range(1,int(T/dt)):
         # print("t:",t)
-        for k in range(0,N):
+        for k in range(N):
             # print(a[1:maxx+1,1:maxy+1,1,t])
-            sum=0.0
-            for ii in range(0,M):
-                sum=sum+get(typ[k],ii,a[pos[k][0],pos[k][1],ii,t-1])
+            sum=0
+            for i in range(M):
+                sum+=V(ii,typ[k],a[pos[k].x,pos[k].y,i,t-1])*w[i]
             sum/=M
             A[k,t]=sum
         da=np.zeros([maxx,maxy,M])
-        for k in range(0,N):
-            for x in range(0,maxx):
-                for y in range(0,maxy):
-                    for i in range(0,M):
-                        da[x,y,i]+=0.1*A[k,t]*e(pos[k][0],pos[k][1],typ[k],A[k,t],x,y)
+        for k in range(N):
+            for x in range(maxx):
+                for y in range(maxy):
+                    for i in range(M):
+                        da[x,y,i]+=A[k,t]*U(typ[k],i,pos[k],pos(x,y))
         a[:,:,:,t]=a[:,:,:,t-1]+da*dt
         # print(a[:maxx,:maxy,0,t])
         # print(da[:maxx,:maxy,0])
         # print(A[:N,t])
-    
     return A
 
 def S(typ,t):

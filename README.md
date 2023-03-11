@@ -86,35 +86,35 @@ $$
 $$
 
 $$
-a=
+a(t)=
 \begin{bmatrix}
     \begin{bmatrix}
-        a_{(0,0),0}(\cdot)\\
+        a_{(0,0),0}(t)\\
         \vdots\\
-        a_{(0,0),M-1}(\cdot)\\
+        a_{(0,0),M-1}(t)\\
     \end{bmatrix}&
     \cdots&
     \begin{bmatrix}
-        a_{(0,maxy-1),0}(\cdot)\\
+        a_{(0,maxy-1),0}(t)\\
         \vdots\\
-        a_{(0,maxy-1),M-1}(\cdot)\\
+        a_{(0,maxy-1),M-1}(t)\\
     \end{bmatrix}&\\
     \vdots&\ddots&\vdots\\
     \begin{bmatrix}
-        a_{(maxx-1,0),0}(\cdot)\\
+        a_{(maxx-1,0),0}(t)\\
         \vdots\\
-        a_{(maxx-1,0),M-1}(\cdot)\\
+        a_{(maxx-1,0),M-1}(t)\\
     \end{bmatrix}&
     \cdots&
     \begin{bmatrix}
-        a_{(maxx-1,maxy-1),0}(\cdot)\\
+        a_{(maxx-1,maxy-1),0}(t)\\
         \vdots\\
-        a_{(maxx-1,maxy-1),M-1}(\cdot)\\
+        a_{(maxx-1,maxy-1),M-1}(t)\\
     \end{bmatrix}
-\end{bmatrix}
+\end{bmatrix}=
 \begin{bmatrix}
     \begin{bmatrix}
-        a_{(x,y),i}(\cdot)\\
+        a_{(x,y),i}(t)\\
     \end{bmatrix}_{i\in [0,M)}
 \end{bmatrix}_{x\in [0,x_{max}),y\in [0,y_{max})}
 \Leftarrow
@@ -177,10 +177,10 @@ $$
 $$
 A(t)=
 \begin{bmatrix}
-    A_0(\cdot)\\
-    A_1(\cdot)\\
+    A_0(t)\\
+    A_1(t)\\
     \vdots\\
-    A_{N-1}(\cdot)
+    A_{N-1}(t)
 \end{bmatrix}\Leftarrow
 \begin{bmatrix}
     N\\
@@ -204,4 +204,26 @@ $$
 \begin{bmatrix}
     U_{{type}_k,i}(pos_k,pos)
 \end{bmatrix}_{k\in [0,N)}
+$$
+
+$$
+a(0)=a_0
+$$
+
+$$
+S=
+\begin{bmatrix}
+    S_0(t)\\
+    S_1(t)\\
+    \vdots\\
+    S_Q-1(t)
+\end{bmatrix}
+$$
+
+$$
+P(r,T,a_0)=\int_0^T(rh_1(t)+(1-r)h_2(t)){A(t)}^T\times
+\begin{bmatrix}
+    S_{{type}_k}(t)
+\end{bmatrix}_{k\in [0,N)}
+dt
 $$
