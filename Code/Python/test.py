@@ -4,7 +4,7 @@ import math
 
 dt=0.1
 
-M=1
+M=8
 N=2
 Q=7
 maxx=54
@@ -27,9 +27,9 @@ class Pos:
 
 pos=[Pos(1,1),Pos(2,2)]
 
-typ=[1,1]
+typ=[3,1]
 
-typName=["越野滑雪设施","农作物农场","牧场","再生农场","农业旅游中心"]
+typName=[["越野滑雪设施"],["农作物农场"],["牧场"],["再生农场"],["农业旅游中心"]]
 
 aInfo=[
     ["坡度",[
@@ -69,35 +69,59 @@ aInfo=[
         [18,5.75],
         [16,4.29]]],
     ["人口",[
-        [0.004,1000],
         [],
         [],
         [],
-        [0.0023,1500]]]
-]
+        [],
+        []]],
+    ["污染",[
+        [-0.2],
+        [-0.5],
+        [-0.2],
+        [-0.15],
+        [-2.5]]]]
 
 def norm(u,sig,x):
     return math.exp((-(x-u)**2)/(2*(sig**2)))/(math.sqrt(2*math.pi)*sig)
+
+cx=60.74
+cy=36.00
+def dis(pos1,pos2):
+    d=pos1+(-pos2)
+    return math.sqrt((d.x*60.74)**2+(d.y*36)**2)
 
 def U(j,i,posk,pos):
     '''
     位于posk的第j种建筑对位于pos的第i个指标的影响程度
     '''
-    if(posk==pos):
-        return -1
-    return -1/((pos+(-posk))**2)
+    if(i==0 or i==2 or i==3 or i==4 or i==5):
+        return 0
+    if(i==6):
+        if(j==0):
+            return 0.004*365
+        if(j==4):
+            return 0.0023*365
+        return 0
+    if(i==7):
+        d=dis(posk,pos)
+        if(((j==0 or (j==4)) and d<=1000)or((j==1 or j==2) and d<=750)):
+            return 1
+        return 0
 
 def V(i,j,a):
     '''
     第i个指标为a时对所在地块的第j种建筑的影响程度
     '''
     temp=aInfo[i][1][j]
-    if(temp.__len__()==0):
-        return 1
-    if(temp.__len__()==2):
-        return norm(temp[0],temp[1],a)
-    if(temp.__len__()==3):
-        return norm(temp[0],temp[1],a)*temp[2]
+    if(i<=6):
+        if(temp.__len__()==0):
+            return 1
+        if(temp.__len__()==2):
+            return norm(temp[0],temp[1],a)
+        if(temp.__len__()==3):
+            return norm(temp[0],temp[1],a)*temp[2]
+    elif(i<=7):
+        return temp[0]*(a!=0)
 
 def dif(T,a0,W):
 
@@ -121,7 +145,13 @@ def dif(T,a0,W):
             for x in range(maxx):
                 for y in range(maxy):
                     for i in range(M):
-                        da[x,y,i]+=A[k,t]*U(typ[k],i,pos[k],Pos(x,y))
+                        if(i==7 and U(typ[k],i,pos[k],Pos(x,y))):
+                            da[x,y,i]=1
+                        elif(i==1):
+                            if(a[x,y,i,t-1]):
+                                da[x,y,i]=-0.125
+                        else:
+                            da[x,y,i]+=A[k,t]*U(typ[k],i,pos[k],Pos(x,y))
         # print(da*dt)
         a[:,:,:,t]=a[:,:,:,t-1]+da*dt
         # print(a[:maxx,:maxy,0,t])
@@ -129,16 +159,20 @@ def dif(T,a0,W):
         # print(A[:N,t])
     return A
 
+s=[13.59-3.22,2.59-0.11,0.675-0.41,1.97-0.06,64.26,3.71]
+
+c=[32.16,0.18,0.075,3.71,185.35]
+
 def S(j,t):
     if t==0:
-        return -1
-    return 1
+        return -c[j]
+    return s[j]
 
 def h(flag,t,T):
     if(flag==1):
-        return t
+        return 1/(math.exp(t-1)+1)
     else:
-        return T-t
+        return 1-1/(math.exp(t-1)+1)
 
 def rate(r,t,T):
     return r*h(1,t,T)+(1-r)*h(2,t,T)
@@ -159,9 +193,12 @@ a0=np.zeros([maxx,maxy,M])
 
 W=np.ones([M])
 
-a0[1,1,0]=1.3
+a0[:,:,2]=0.719
+a0[:,:,3]=104.1
+a0[:,:,4]=5.5
+a0[:,:,5]=9.3
+a0[:,:,6]=0.01
+a0[:,:,7]=0
 
-a0[2,2,0]=90
-
-print(P(0.5,10,a0,W))
+print(P(0.2,10,a0,W))
 
