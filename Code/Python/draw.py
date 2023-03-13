@@ -7,9 +7,8 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 
-with open("C:/Users/linru/Desktop/IMMC/Code/3D/无标题.obj","rb") as f:
+with open("C:/Users/linru/Desktop/IMMC/Code/3D/5.obj","rb") as f:
     s = f.read()
-
 
 xyz = s.splitlines()
 
@@ -17,49 +16,56 @@ start=[]
 
 asp=[]
 
+
 out=[]
 
-for inf in range(4,1596):
+index=[]
 
-    start.append([float(xyz[inf].split()[1]),float(xyz[inf].split()[3]),float(xyz[inf].split()[2])])
-
-
-for inf in range(1596,3188):
-    i=inf-1596
-    asp.append([float(xyz[inf].split()[1]),float(xyz[inf].split()[3]),float(xyz[inf].split()[2])])
-    out.append(180*math.acos(asp[i][2]/math.sqrt(asp[i][0]**2+asp[i][1]**2+asp[i][2]**2))/math.pi)
-
-
-
-# fig = plt.figure()
+for inf in range(3188): 
+    # print(xyz[inf].split()[0])
+    if(xyz[inf].split()[0]==b'v'):
+        index.append(inf)
+        start.append([float(xyz[inf].split()[1]),float(xyz[inf].split()[2]),float(xyz[inf].split()[3])])
+    elif(xyz[inf].split()[0]==b'vn'):
+        i=inf-1596
+        asp.append([float(xyz[inf].split()[1]),float(xyz[inf].split()[2]),float(xyz[inf].split()[3])])
+        out.append(180*math.acos(asp[i][2]/math.sqrt(asp[i][0]**2+asp[i][1]**2+asp[i][2]**2))/math.pi)
 
 
-# ax = fig.add_axes(Axes3D(fig))
+fig = plt.figure(dpi=100)
 
 
-# # ax.set_zlim3d(0,12)
-
-# # print(start[1],end[1])
+ax = fig.add_axes(Axes3D(fig))
 
 
-# for i in range(1596-4):
+ax.set_zlim3d(0,12) 
 
-#     ax.quiver(start[i][0],start[i][1],start[i][2],end[i][0],end[i][1],end[i][2],arrow_length_ratio=0.1)
+# print(start[1],end[1])
 
 
+for i in range(1596-4):
 
-# plt.show()
+    ax.quiver(start[i][0],start[i][1],start[i][2],asp[i][0],asp[i][1],asp[i][2],arrow_length_ratio=0.1)
 
-fig = plt.figure()  
+plt.show()
 
-# ax = plt.axes(projection='3d')
+# fig = plt.figure(dpi=150)  
 
-# plt.axis('off')
+# # ax = plt.axes(projection='3d')
 
-start=np.array(start)
-out=np.array(out)
+# # plt.axis('off')
 
-plt.scatter(start[:,0],start[:,1],c=out,s=17)
+# start=np.array(start)
+# out=np.array(out)
+
+# with open('C:/Users/linru/Desktop/IMMC/Code/Python/out', 'a+') as ff:
+
+#     for i in range(37):
+#         for j in range(54):
+#             print(out[(37-i)*54+j],end=' ',file=ff)
+#         print("",file=ff)
+
+plt.scatter(-start[:,1],start[:,0],c=out,s=17)
 plt.colorbar()
 # ax.scatter3D(x, y, z,c=num)
 
