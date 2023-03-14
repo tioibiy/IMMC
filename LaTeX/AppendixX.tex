@@ -1,0 +1,45 @@
+%! Author = ruochongli
+%! Date = 2023/3/10
+
+% Preamble
+\documentclass[./main.tex]{subfiles}
+% Packages
+
+% Document
+\begin{document}
+    \subsection{Code for Visualizing Altitude and Slope}
+    \begin{spacing}
+        \begin{lstlisting}%[language={Python}]
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+with open("./3Dmap.stl","rb") as f:
+    s = f.read()
+
+xyz = s.splitlines()
+
+start=[]
+
+end=[]
+
+for inf in range(4,1596):
+    start.append([float(xyz[inf].split()[1]),float(xyz[inf].split()[3]),float(xyz[inf].split()[2])])
+
+for inf in range(1596,3188):
+    end.append([float(xyz[inf].split()[1]),float(xyz[inf].split()[3]),float(xyz[inf].split()[2])])
+
+fig = plt.figure()
+
+ax = fig.add_axes(Axes3D(fig))
+
+for i in range(1596-4):
+    ax.quiver(start[i][0],start[i][1],start[i][2],end[i][0],end[i][1],end[i][2],arrow_length_ratio=0.1)
+
+
+plt.show()
+        \end{lstlisting}
+    \end{spacing}
+
+
+\end{document}

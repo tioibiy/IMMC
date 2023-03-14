@@ -1,0 +1,46 @@
+%! Author = ruochongli
+%! Date = 2023/3/11
+
+% Preamble
+\documentclass[./main.tex]{subfiles}
+
+% Packages
+
+% Document
+\begin{document}
+    \section{Strength and Weakness}
+    \subsection{Strength}
+    \begin{enumerate}
+        \item Our model divides the property of the entire Red Creek into just short of $2000$ grids, which is able to take
+        the difference in topography and environment of grids into consideration of the whole solution.
+        This model can eliminate some facilities on steeper slopes to make the solution more realistic.
+        Furthermore, the pollution caused by some facilities will distribute in the soil can also be taken into
+        consideration.
+        Generally, the model can be used to analyze complex and varying terrain.
+        \item The basic structure of our overall model allows highly customized needs and a large range of expansion.
+        The function of customization is developed because the algorithm $\alpha_{pos, i}\left ( t \right )$ can be
+        modified according to a specific metric $i$ such as slope, humidity or temperature.
+        Similar modification can be made in $U$ and $V$, which is used to measure the interaction between all the grids to one fixed grid when the range of $i$ is affirmation.
+        Furthermore, the model is expandable for the use of nearly every problem whose pivotal difficulty is
+         to quantify the impact between considered grids.
+        This is because the form of \lq\lq{matrix $\times$ matrix
+        }\rq\rq in the model can reflect all the mutual influence between each grid due to the feature of the
+        cross multiplication.
+        \item The model has the potential to be very accurate because theoretically it can involve every metric that
+        the problem requires to consider.
+        Also, the sub-function used to quantify the metric is customized, which can also be very
+        accurate if there are sufficient data.
+    \end{enumerate}
+    \subsection{Weakness}
+    \begin{enumerate}
+        \item The model is simplified.
+        It assumes that each grid within a grid is homogeneous, and does not take into account variations within each grid.
+        This oversimplification may result in inaccurate results in some scenarios.
+        \item The model is difficulty to calibrate.
+        The model requires calibration to ensure accurate results, which can be a time-consuming and challenging process.
+        \item The model is relatively complex and may require significant technical expertise to develop and operate, making it less accessible to those without specialized training.
+    \end{enumerate}
+
+
+
+\end{document}
