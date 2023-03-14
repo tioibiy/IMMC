@@ -1,0 +1,45 @@
+%! Author = ruochongli
+%! Date = 2023/3/9
+
+\documentclass[./main.tex]{subfiles}
+
+% Packages
+
+% Document
+\begin{document}
+    \section{Notations}
+    Symbol contained in this paper are shown and described in Table\ref{tab:tablenotations} .
+    \begin{longtable}{c l}
+        \centering
+        \caption{Notations contained in this paper}
+        \label{tab:tablenotations}\\
+        \toprule
+        \textbf{Symbols} & \textbf{Description} \\ \midrule
+        $M$ & Number of metrics \\[0.2cm]
+        $N$ & Number of facilities \\[0.2cm]
+        $Q$ & Type of facilities \\[0.2cm]
+        $T$ & Total time of operation \\[0.2cm]
+        $P$ & Coefficient of profit \\[0.2cm]
+        $\alpha$ & The value of the metric \\[0.2cm]
+        $h_c\left( t \right)$ & The function to describe the relation between the conversion rate and time \\[0.2cm]
+        $S$ & The function to describe the relation between the profit and time \\[0.2cm]
+        $\left( x,y \right)$ & Position on map \\[0.2cm]
+        $\text{pos}_k=\left( x_k, y_k \right)$ & Position of the $k^{th}$ facility \\[0.2cm]
+        $j=\mathrm{type}_k$ & Type of the $k^{th}$ facility \\[0.2cm]
+        $\left[ f_i \right]_{i=1}^n$ & Matrix that contains $f_i$, $i\in \left[ 1, n \right]$ \\[0.2cm]
+        $f\left( \cdot \right)$ & A function $f$ where the dot ($\cdot$) stands for expression \\[0.2cm]
+        $\begin{bmatrix} A \\ B \\ C \end{bmatrix}$ & $A\times B$ matrix with every element a $1\times C$ matrix \\[0.8cm]
+        $\begin{bmatrix} A \\ B \end{bmatrix}$ & $A\times B$ matrix \\[0.5cm]
+        $\begin{bmatrix} B \end{bmatrix}$ & $1\times B$ matrix \\[0.4cm]
+        $U$ & A matrix of $\begin{bmatrix} Q \\ M \end{bmatrix}$ that describes how facilities affect the environment \\[0.5cm]
+        $V$ & A matrix of $\begin{bmatrix} M \\ Q \end{bmatrix}$ that describes how the environment affects the
+        facilities \\[0.5cm]
+        $A$ & A value that describes the activity of any facility \\[0.2cm]
+        $W$ & A matrix of $\begin{bmatrix} 1 \\ M \end{bmatrix}$ that describes the weight of every metrics \\[0.2cm]
+        \bottomrule
+
+    \end{longtable}
+
+
+
+\end{document}
